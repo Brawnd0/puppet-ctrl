@@ -13,18 +13,31 @@
 #   - install abstractit/puppet module
 #   - 
 
+# yum install git rubygems
+# gem install bundle
+TOPDIR=`basedir $0`
+
+cd ${TOPDIR}/..
+bundle install --path=vendor/bundle --binstubs=bin/
+
 # Add bootstrap modules
 mkdir -p /root/bootstrap/modules
-puppet module install --modulepath=/root/bootstrap/modules zack/r10k --version 2.5.8
-#puppet module install --modulepath=/root/bootstrap/modules stahnma/epel --version 1.0.2
+./bin/puppet module install --modulepath=/root/bootstrap/modules zack/r10k --version 2.8.2
+./bin/puppet module install --modulepath=/root/bootstrap/modules maestrodev/rvm --version 1.12.0
+./bin/puppet module install --modulepath=/root/bootstrap/modules hunner/hiera --version 1.1.1
+./bin/puppet module install --modulepath=/root/bootstrap/modules stahnma/epel --version 1.0.2
+./bin/puppet module install --modulepath=/root/bootstrap/modules puppetlabs/puppetdb --version 4.3.0
+#./bin/puppet module install --modulepath=/root/bootstrap/modules abstractit-puppet --version 1.3.1
+
+
 #puppet module install --modulepath=/root/bootstrap/modules stephenrjohnson/puppet --version 1.3.1
 #puppet module install --modulepath=/root/bootstrap/modules abstractit-puppet --version 1.3.1
 #puppet module install --modulepath=/root/bootstrap/modules hunner/hiera --version 1.1.1
 
 # Configure the master, hiera, and r10k services
 #puppet apply --modulepath=/root/bootstrap/modules master.pp && \
-#  puppet apply --modulepath=/root/bootstrap/modules hiera.pp && \
-#  puppet apply --modulepath=/root/bootstrap/modules r10k.pp && \
+puppet apply --modulepath=/root/bootstrap/modules hiera.pp && \
+  puppet apply --modulepath=/root/bootstrap/modules r10k.pp
 
 
 # If everything went well, deploy using r10k
