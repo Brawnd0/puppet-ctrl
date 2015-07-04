@@ -6,7 +6,7 @@ class { 'r10k':
   version           => '1.5.1',
   sources           => {
     'puppet' => {
-      'remote'  => 'git@github.com:Brawnd0/puppet-ctrl.git',
+      'remote'  => 'https://github.com/Brawnd0/puppet-ctrl.git',
       'basedir' => "${::settings::confdir}/environments",
       'prefix'  => false,
     },
