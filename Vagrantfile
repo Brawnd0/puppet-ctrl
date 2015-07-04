@@ -148,8 +148,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       node.vm.provider 'virtualbox' do |vb|
         vb.customize [ 'modifyvm', :id, '--memory', node_details['memory'] ]
         vb.customize [ 'modifyvm', :id, '--cpus', node_details['cpus'] ]
-        vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-        vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+        vb.customize ["modifyvm", :id, "--natdnshostresolver1", "off"]
+        vb.customize ["modifyvm", :id, "--natdnsproxy1", "off"]
         vb.name = node_name
       end
       node.vm.provider 'vmware_fusion' do |vmf|
