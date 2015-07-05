@@ -41,7 +41,9 @@ mkdir -p $MODPATH
 ./bin/puppet module install --modulepath=$MODPATH hunner/hiera --version 1.1.1
 ./bin/puppet module install --modulepath=$MODPATH stahnma/epel --version 1.0.2
 ./bin/puppet module install --modulepath=$MODPATH puppetlabs/puppetdb --version 4.3.0
-./bin/puppet module install --modulepath=$MODPATH abstractit-puppet --version 1.3.1
+./bin/puppet module install --modulepath=$MODPATH puppet/puppetboard --version 2.7.1
+./bin/puppet module install --modulepath=$MODPATH puppetlabs/apache --version 1.5.0
+./bin/puppet module install --modulepath=$MODPATH abstractit/puppet --version 1.7.7
 
 
 exit
