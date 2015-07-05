@@ -1,9 +1,11 @@
 boxes:
   puppetlabs/centos-6.6-64-nocm: "puppetlabs/centos-6.6-64-nocm"
+  chef/centos-6.5: "chef/centos-6.5"
 nodes:
   xmaster:
     hostname: xmaster.vagrant.vm
-    box: puppetlabs/centos-6.6-64-nocm
+    #box: puppetlabs/centos-6.6-64-nocm
+    box: chef/centos-6.5
     memory: 4096
     cpus: 1
     networks:
@@ -19,7 +21,8 @@ nodes:
         guest: /vagrant
   xagent:
     hostname: xagent.vagrant.vm
-    box: puppetlabs/centos-6.6-64-nocm
+    #box: puppetlabs/centos-6.6-64-nocm
+    box: chef/centos-6.5
     memory: 1024
     cpus: 1
     networks:

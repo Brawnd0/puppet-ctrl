@@ -16,10 +16,18 @@
 # If redhat
 
 service iptables stop
+if [ ! $(grep single-request-reopen /etc/sysconfig/network) ]; then
+    #sysctl -w net.ipv6.conf.all.disable_ipv6=1
+    #sysctl -w net.ipv6.conf.default.disable_ipv6=1
+    echo 'net.ipv6.conf.all.disable_ipv6 = 1' >> /etc/sysctl.conf
+    echo 'RES_OPTIONS=single-request-reopen' >> /etc/sysconfig/network 
+    echo 'NETWORKING_IPV6=no' >> /etc/sysconfig/network
+
+fi
 rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm
 yum install -y git rubygems
-#gem install bundle
-gem install --source 'https://rubygems.org' bundler
+gem install bundle
+#gem install --source 'https://rubygems.org' bundler
 
 TOPDIR=`git rev-parse --show-toplevel`
 
