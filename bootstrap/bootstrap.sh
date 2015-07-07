@@ -34,7 +34,7 @@ cd ${TOPDIR}/
 bundle install --path=vendor/bundle --binstubs=bin/
 
 # Add bootstrap modules
-MODPATH=$$TOPDIR/tmp/bootstrap/modules
+MODPATH=$TOPDIR/tmp/bootstrap/modules
 mkdir -p $MODPATH
 ./bin/puppet module install --modulepath=$MODPATH zack/r10k --version 2.8.2
 #./bin/puppet module install --modulepath=$MODPATH maestrodev/rvm --version 1.12.0

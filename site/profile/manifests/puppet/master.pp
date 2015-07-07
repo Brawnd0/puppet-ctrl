@@ -3,9 +3,6 @@
 #
 #
 #
-#
-#
-
 class { '::puppet::profile::master':
     server_type    => 'puppetserver',
     basemodulepath => '/etc/puppet/modules:site',
