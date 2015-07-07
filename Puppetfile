@@ -8,7 +8,7 @@ mod 'puppetlabs/concat', '1.2.3'
 mod 'puppetlabs/apache', '1.5.0'
 mod 'puppetlabs/postgresql', '4.4.1'
 mod 'puppetlabs/puppetdb', '4.3.0'
-mod 'puppetlabs/puppetboard', '2.7.1'
+mod 'puppet/puppetboard', '2.7.1'
 #
 #
 #
