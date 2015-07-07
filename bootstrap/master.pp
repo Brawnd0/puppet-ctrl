@@ -22,7 +22,16 @@
 #}
 
 #include '::puppet'
-class { '::puppet::master' :
-  server_type => 'puppetserver',
-
+class { '::puppet' :
+  manage_repos => false,
 }
+class { '::puppet::master' :
+  server_type      => 'puppetserver',
+  hiera_hierarchy  => [
+    'node/%{::clientcert}',
+    'app_tier/%{::app_tier}',
+    'global' ],
+}
+
+
+

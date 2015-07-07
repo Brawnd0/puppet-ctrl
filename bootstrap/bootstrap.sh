@@ -14,8 +14,8 @@
 #   - 
 
 # If redhat
+rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm
 
-#rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm
 yum install -y git rubygems
 gem install bundle
 
@@ -25,31 +25,19 @@ cd ${TOPDIR}/
 bundle install --path=vendor/bundle --binstubs=bin/
 
 # Add bootstrap modules
-MODPATH=$TOPDIR/environments/bootstrap
-#mkdir -p $MODPATH
-#./bin/puppet module install --modulepath=$MODPATH zack/r10k --version 2.8.2
-##./bin/puppet module install --modulepath=$MODPATH maestrodev/rvm --version 1.12.0
-#./bin/puppet module install --modulepath=$MODPATH hunner/hiera --version 1.1.1
-#./bin/puppet module install --modulepath=$MODPATH stahnma/epel --version 1.0.2
-#./bin/puppet module install --modulepath=$MODPATH puppetlabs/puppetdb --version 4.3.0
-#./bin/puppet module install --modulepath=$MODPATH puppet/puppetboard --version 2.7.1
-#./bin/puppet module install --modulepath=$MODPATH puppetlabs/apache --version 1.5.0
-#./bin/puppet module install --modulepath=$MODPATH abstractit/puppet --version 1.7.7
-#
+./bin/r10k deploy environment -pv
 
-exit
-#puppet module install --modulepath=$MODPATH stephenrjohnson/puppet --version 1.3.1
-#puppet module install --modulepath=$MODPATH abstractit-puppet --version 1.3.1
-#puppet module install --modulepath=$MODPATH hunner/hiera --version 1.1.1
+MODPATH=$TOPDIR/environments/production
+#mkdir -p $MODPATH
 
 # Configure the master, hiera, and r10k services
-#puppet apply --modulepath=$MODPATH master.pp && \
-puppet apply --modulepath=$MODPATH hiera.pp && \
-  puppet apply --modulepath=$MODPATH r10k.pp
+puppet apply --modulepath=$MODPATH $TOPDIR/bootstrap/master.pp
+#puppet apply --modulepath=$MODPATH $TOPDIR/bootstrap/hiera.pp && \
+#  puppet apply --modulepath=$MODPATH $TOPDIR/bootstrap/r10k.pp
 
 
 # If everything went well, deploy using r10k
-r10k deploy environment -p
+#r10k deploy environment -p
 
 # If everything is successful, run puppet, otherwise alert
 if [ $? -eq 0 ]
