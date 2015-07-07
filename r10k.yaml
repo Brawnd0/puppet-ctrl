@@ -1,0 +1,7 @@
+---
+# Store all cache information in /var/cache
+cachedir: 'cache/r10k'
+sources:
+    local:
+        remote: .
+        basedir: ./environments

@@ -4,4 +4,6 @@ bundle/
 vendor/
 bin/
 tmp/
+environments/
+cache/
 
