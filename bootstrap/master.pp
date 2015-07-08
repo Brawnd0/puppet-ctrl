@@ -8,7 +8,7 @@ class { '::puppet::master' :
   basemodulepath  => '/etc/puppet/modules:/usr/share/puppet/modules:site',
   hiera_backends  => {
     'yaml' => {
-      'datadir' => '/etc/puppet/environments/%{environment}/hiera',
+      'datadir' => '/etc/puppet/environments/%{environment}/hieradata',
     }
   },
   hiera_hierarchy => [
