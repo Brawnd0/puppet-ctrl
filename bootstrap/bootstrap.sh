@@ -14,7 +14,10 @@
 #   - 
 
 # If redhat
-sudo rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm
+if [ ! -f /etc/yum.repos.d/puppetlabs.repo ]; then
+  sudo rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm
+fi
+
 
 sudo yum install -y git rubygems
 sudo gem install bundle
@@ -24,20 +27,26 @@ if [ -d '/vagrant' ]; then
 fi
 
 TOPDIR=`git rev-parse --show-toplevel`
+echo "TOPDIR = '$TOPDIR'"
 
 cd ${TOPDIR}/
-bundle install --path=vendor/bundle --binstubs=bin/
+#bundle install --path=vendor/bundle --binstubs=bin/
 
 # Add bootstrap modules
-./bin/r10k deploy environment -pv
+#./bin/r10k deploy environment -pv
 
-MODPATH=$TOPDIR/environments/production
+MODPATH=$TOPDIR/environments/production/modules
 #mkdir -p $MODPATH
+echo "MODPATH = '$MODPATH'"
 
 # Configure the master, hiera, and r10k services
-./bin/puppet apply --modulepath=$MODPATH $TOPDIR/bootstrap/master.pp
+echo "Running: sudo $TOPDIR/bin/puppet apply --modulepath=$MODPATH $TOPDIR/bootstrap/master.pp"
+sudo $TOPDIR/bin/puppet apply --modulepath=$MODPATH $TOPDIR/bootstrap/master.pp 
+
+echo "sudo $TOPDIR/bin/puppet apply --modulepath=$MODPATH $TOPDIR/bootstrap/r10k.pp"
+sudo $TOPDIR/bin/puppet apply --modulepath=$MODPATH $TOPDIR/bootstrap/r10k.pp
+
 #puppet apply --modulepath=$MODPATH $TOPDIR/bootstrap/hiera.pp && \
-#  puppet apply --modulepath=$MODPATH $TOPDIR/bootstrap/r10k.pp
 
 
 # If everything went well, deploy using r10k
@@ -46,9 +55,9 @@ MODPATH=$TOPDIR/environments/production
 # If everything is successful, run puppet, otherwise alert
 if [ $? -eq 0 ]
 then
-  puppet agent -t
-  chkconfig puppet on
-  service puppet start
+  sudo puppet agent -t
+  sudo chkconfig puppet on
+  sudo service puppet start
 else
   echo "Some part of the bootstrap process failed. Investigate the errors and proceed with manual bootstrapping."
   echo ""

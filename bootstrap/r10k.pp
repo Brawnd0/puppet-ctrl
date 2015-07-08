@@ -1,8 +1,6 @@
-Package {
-  allow_virtual => true,
-}
 
-class { 'r10k':
+
+class { '::r10k':
   version           => '1.5.1',
   sources           => {
     'puppet' => {
@@ -12,5 +10,7 @@ class { 'r10k':
     },
   },
   manage_modulepath => false,
-  provider => 'gem',
+  provider          => 'gem',
+  cachedir          => '/var/cache/r10k',
 }
+
