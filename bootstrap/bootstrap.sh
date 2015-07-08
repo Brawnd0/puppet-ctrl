@@ -43,8 +43,11 @@ echo "MODPATH = '$MODPATH'"
 echo "Running: sudo $TOPDIR/bin/puppet apply --modulepath=$MODPATH $TOPDIR/bootstrap/master.pp"
 sudo $TOPDIR/bin/puppet apply --modulepath=$MODPATH $TOPDIR/bootstrap/master.pp 
 
-echo "sudo $TOPDIR/bin/puppet apply --modulepath=$MODPATH $TOPDIR/bootstrap/r10k.pp"
-sudo $TOPDIR/bin/puppet apply --modulepath=$MODPATH $TOPDIR/bootstrap/r10k.pp
+#echo "sudo $TOPDIR/bin/puppet apply --modulepath=$MODPATH $TOPDIR/bootstrap/r10k.pp"
+#sudo $TOPDIR/bin/puppet apply --modulepath=$MODPATH $TOPDIR/bootstrap/r10k.pp
+
+echo "sudo /usr/bin/puppet apply --modulepath=/vagrant/environments/production/modules /vagrant/bootstrap/r10k.pp"
+sudo /usr/bin/puppet apply --modulepath=/vagrant/environments/production/modules /vagrant/bootstrap/r10k.pp
 
 #puppet apply --modulepath=$MODPATH $TOPDIR/bootstrap/hiera.pp && \
 

@@ -9,7 +9,7 @@ class { '::r10k':
       'prefix'  => false,
     },
   },
-  manage_modulepath => false,
+  #manage_modulepath => false,
   provider          => 'gem',
   cachedir          => '/var/cache/r10k',
 }
