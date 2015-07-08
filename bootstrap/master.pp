@@ -6,7 +6,7 @@ class { '::puppet' :
 class { '::puppet::master' :
   server_type     => 'puppetserver',
   basemodulepath  => '/etc/puppet/modules:/usr/share/puppet/modules:site',
-  datadir         => '/etc/puppet/environments/%{environment}/hiera',
+  hieradata_path  => '/etc/puppet/environments/%{environment}/hiera',
   hiera_hierarchy => [
     'node/%{::clientcert}',
     'app_tier/%{::app_tier}',
