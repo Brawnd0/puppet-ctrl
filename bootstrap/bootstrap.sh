@@ -14,10 +14,14 @@
 #   - 
 
 # If redhat
-rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm
+sudo rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm
 
-yum install -y git rubygems
-gem install bundle
+sudo yum install -y git rubygems
+sudo gem install bundle
+
+if [ -d '/vagrant' ]; then
+    cd /vagrant
+fi
 
 TOPDIR=`git rev-parse --show-toplevel`
 
@@ -31,7 +35,7 @@ MODPATH=$TOPDIR/environments/production
 #mkdir -p $MODPATH
 
 # Configure the master, hiera, and r10k services
-puppet apply --modulepath=$MODPATH $TOPDIR/bootstrap/master.pp
+./bin/puppet apply --modulepath=$MODPATH $TOPDIR/bootstrap/master.pp
 #puppet apply --modulepath=$MODPATH $TOPDIR/bootstrap/hiera.pp && \
 #  puppet apply --modulepath=$MODPATH $TOPDIR/bootstrap/r10k.pp
 
